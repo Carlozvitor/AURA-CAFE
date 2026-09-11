@@ -1,115 +1,77 @@
-# MazyOS — Sistema operacional do negócio
+# Aura Café — MazyOS
 
-Sua empresa roda em cima desse arquivo. Aqui ficam as regras de operação
-do MazyOS — como o Claude lê o contexto, aprende com correções, mantém
-tudo atualizado e cria skills novas conforme a operação evolui.
+> Operação da marca Aura Café. Aqui a gente define identidade visual,
+> produz conteúdo e copy, e constrói a experiência digital da marca
+> (site cinematográfico, minimalista e sensorial).
 
-Esse arquivo é editável. Quando o `/instalar` rodar, ele complementa o
-final dessa página com as regras específicas do seu negócio.
+## O que é esse workspace
 
----
+Operação da marca Aura Café — construção da identidade visual, do site
+(experiência digital como extensão da marca) e do conteúdo que sustenta
+o posicionamento premium e editorial da marca.
 
-## Contexto do negócio
+**Estrutura de pastas:**
+- `_memoria/` — quem é a Aura Café, como ela fala, o que tá em foco
+- `identidade/` — cores, fontes, logo, padrão visual
+- `marketing/` — conteúdo, SEO, campanhas (saída das skills)
+- `saidas/` — análises, emails, documentos pontuais
+- `dados/` — arquivos a analisar (CSV, PDF, planilha)
+- `scripts/` — utilitários (gerar imagem, postar, render)
+- `templates/` — modelos usados pelas skills
 
-No início de toda conversa, ler os seguintes arquivos (quando existirem
-e estiverem preenchidos):
+## Quem sou
 
-1. `_memoria/empresa.md` — quem é o usuário, o que faz, como funciona o negócio
-2. `_memoria/preferencias.md` — tom de voz, estilo de escrita, o que evitar
-3. `_memoria/estrategia.md` — foco atual, prioridades, prazos
+Aura Café — marca fictícia de café contemporânea e sofisticada, criada
+para transmitir uma experiência que vai além de simplesmente tomar café.
+O diferencial é o conceito de que cada café tem uma "aura": um momento,
+uma sensação, uma história. Comunicação emocional, visualmente impactante,
+focada em atmosfera, desejo e experiência — não em catálogo de produto.
 
-Usar essas informações como base pra qualquer resposta ou decisão. Ao
-sugerir prioridades, formatos ou abordagens, considerar o foco atual
-descrito em `estrategia.md`.
+## O que produzo
 
-Pra qualquer tarefa visual (carrossel, post, landing page), consultar
-`identidade/design-guide.md` como referência de estilo.
+- Site como extensão da experiência de marca (navegação cinematográfica,
+  minimalista, envolvente — imagens, vídeos, tipografia, movimento sutil)
+- Copy e textos institucionais no tom editorial da marca
+- Conteúdo de marca alinhado à identidade visual (em definição)
 
-Não é necessário listar o que foi lido nem confirmar a leitura. Apenas
-usar o contexto naturalmente.
+## Minha audiência
 
----
+Público premium/lifestyle — consumidores que valorizam estética,
+experiência e status na escolha de marca. Buscam transformar momentos
+cotidianos (café da manhã, trabalho, pausa, conversa) em experiências
+especiais.
 
-## Fluxo de trabalho
+## Tom de voz
 
-Antes de executar qualquer tarefa, verificar se existe skill relevante
-em `.claude/skills/`. Se encontrar, seguir as instruções da skill. Se
-não encontrar, executar a tarefa normalmente.
+Sofisticado, sensorial e contemporâneo, mas natural e humano. Textos
+curtos, marcantes, com personalidade — poucas palavras, bem escolhidas.
+Desperta desejo e transmite atmosfera (pausa, aroma, sabor). Premium,
+cultural e moderno, sem ser elitista.
 
-Ao concluir uma tarefa que não tinha skill mas parece repetível (o
-usuário provavelmente vai pedir de novo no futuro), perguntar:
+Evitar: clichê de guru/venda agressiva, clichês de cafeteria genéricos,
+frases motivacionais genéricas, linguagem excessivamente luxuosa ou elitista.
 
-> "Isso pode virar uma skill pra próxima vez. Quer que eu crie?"
+## Posicionamento
 
-Não perguntar pra tarefas pontuais ou perguntas simples. Só quando o
-padrão de repetição for claro.
+A Aura Café não vende café — vende a experiência de uma pausa com
+identidade. Estética editorial e premium, mas acessível; a marca se
+diferencia por tratar cada consumo como um momento com significado
+próprio, não como transação.
 
----
+## Regras do sistema
 
-## Aprender com correções
+- Conteúdo novo salvar em `marketing/conteudo/<tipo>-<tema>-<data>/`
+- Antes de criar qualquer visual (site, carrossel, post), checar
+  `identidade/design-guide.md` — ainda em definição, ver
+  `_memoria/estrategia.md` para a prioridade de fechar a identidade visual
+- Copy do site é candidata a virar skill própria (via `/mapear-rotinas`)
 
-Quando o usuário corrigir algo, melhorar uma resposta ou dar uma
-instrução que parece permanente (frases como "na verdade é assim", "não
-faça mais isso", "prefiro assim", "sempre que...", "evita...", "da
-próxima vez..."), perguntar:
+## Ferramentas conectadas
 
-> "Quer que eu salve isso pra não precisar repetir?"
+- [ ] Notion
+- [ ] Canva
+- [ ] Google Calendar
+- [ ] Meta Ads
+- [ ] Google Ads
 
-Se sim, identificar onde faz mais sentido salvar:
-
-- **Sobre o negócio** (clientes, serviços, mercado) → `_memoria/empresa.md`
-- **Sobre preferências e estilo** (tom de voz, formato, o que evitar) → `_memoria/preferencias.md`
-- **Sobre prioridades e foco** (projetos, metas, prazos) → `_memoria/estrategia.md`
-- **Regra de comportamento nessa pasta** → próprio `CLAUDE.md`
-
-Salvar com uma linha nova clara, sem reformatar o arquivo inteiro.
-Confirmar mostrando a linha adicionada.
-
-Não perguntar se a correção for óbvia de contexto imediato (ex: "na
-verdade o arquivo se chama X"). Só perguntar quando a informação tiver
-valor duradouro.
-
----
-
-## Manter contexto atualizado
-
-Ao terminar uma tarefa que mudou algo relevante (cliente novo, skill
-nova, mudança de foco, processo novo, ferramenta instalada, estrutura
-alterada), perguntar:
-
-> "Isso mudou algo no teu contexto. Quer que eu atualize a memória?"
-
-Se sim, identificar o que atualizar:
-
-- **Cliente, serviço, ferramenta, equipe** → `_memoria/empresa.md`
-- **Mudança de prioridade ou foco** → `_memoria/estrategia.md`
-- **Tom ou estilo** → `_memoria/preferencias.md`
-- **Pasta, regra de organização, skill criada** → `CLAUDE.md`
-- **Visual (cores, fontes, logo)** → `identidade/design-guide.md`
-
-Mostrar o que vai mudar antes de salvar. Não reformatar o arquivo
-inteiro, só adicionar ou editar a linha relevante.
-
-**Quando NÃO perguntar:**
-- Tarefas pontuais sem impacto no contexto (escrever um email avulso, criar um post)
-- Perguntas simples ou conversas sem ação
-- Mudanças já salvas pelo bloco "Aprender com correções"
-
-**Dica:** rode `/atualizar` pra uma varredura completa quando houver dúvida.
-
----
-
-## Criação de skills
-
-Quando o usuário pedir skill nova:
-
-1. Verificar se existe template relevante em `templates/skills/`. Se
-   existir, usar como base e adaptar pro contexto
-2. Perguntar se é específica desse projeto ou útil em qualquer:
-   - Específica → `.claude/skills/nome-da-skill/SKILL.md` (local)
-   - Universal → `~/.claude/skills/nome-da-skill/SKILL.md` (global)
-3. Ler `_memoria/empresa.md` e `_memoria/preferencias.md` pra calibrar
-   o conteúdo da skill ao contexto do negócio
-4. Se a skill precisar de arquivos de apoio (templates, exemplos),
-   criar dentro da pasta da skill
-5. Seguir o fluxo da skill-creator nativa do Claude Code
+*(Marcar conforme for instalando os MCPs)*

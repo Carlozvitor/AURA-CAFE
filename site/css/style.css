@@ -1,0 +1,243 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+}
+
+body {
+  font-family: 'Instrument Sans', -apple-system, sans-serif;
+  background: #0a0a0a;
+}
+
+/* --- Scroll-driven video section --- */
+
+.scroll-video-section {
+  position: relative;
+  height: 400vh;
+}
+
+.scroll-video-sticky {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.scroll-frame {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* --- Texto sincronizado ao scroll --- */
+
+.scroll-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 7vw;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* Posição do bloco de texto dentro da cena — varia por frase conforme
+   onde o assunto do vídeo deixa espaço livre na composição. */
+.scroll-text--bottom-left {
+  justify-content: flex-end;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.scroll-text--bottom-right {
+  justify-content: flex-end;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.scroll-text--top-left {
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.scroll-text--top-right {
+  justify-content: flex-start;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.scroll-text__kicker {
+  display: block;
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 500;
+  font-size: clamp(0.65rem, 0.9vw, 0.8rem);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #f6f3ee;
+  opacity: 0.62;
+  margin-bottom: 0.9em;
+}
+
+.scroll-text__line {
+  margin: 0;
+  max-width: min(30ch, 82vw);
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 500;
+  font-size: clamp(1.9rem, 4.2vw, 3.75rem);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: #f6f3ee;
+  text-shadow: 0 2px 28px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 640px) {
+  .scroll-text {
+    padding: 8vw;
+  }
+
+  .scroll-text__kicker {
+    font-size: 0.68rem;
+    margin-bottom: 0.7em;
+  }
+
+  .scroll-text__line {
+    max-width: 88vw;
+    font-size: clamp(1.6rem, 6.4vw, 2.4rem);
+  }
+}
+
+/* --- Seção "A Aura" --- */
+/* Respiro depois do vídeo: fundo claro, silencioso, editorial. */
+
+.about-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: #f3ede3;
+  padding: 12vh 9vw;
+}
+
+.about-content {
+  position: relative;
+  z-index: 2;
+  max-width: 34rem;
+}
+
+.about-kicker {
+  margin: 0 0 2.5em;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #96897a;
+  opacity: 0;
+}
+
+.about-title {
+  margin: 0;
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 600;
+  font-size: clamp(2.5rem, 5.4vw, 4.75rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: #201d18;
+  opacity: 0;
+}
+
+.about-subtitle {
+  margin: 1.4em 0 0;
+  max-width: 24ch;
+  font-weight: 400;
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+  line-height: 1.6;
+  color: #7c7364;
+  opacity: 0;
+}
+
+.about-mark {
+  margin: 4em 0 0;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ab9f8d;
+  opacity: 0;
+}
+
+.about-graphic {
+  position: absolute;
+  top: 50%;
+  right: -6vw;
+  width: min(46vw, 620px);
+  height: min(46vw, 620px);
+  transform: translateY(-50%);
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.about-graphic__halo {
+  position: absolute;
+  inset: 8%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(196, 154, 110, 0.28) 0%, rgba(196, 154, 110, 0.12) 45%, rgba(196, 154, 110, 0) 72%);
+  filter: blur(6px);
+}
+
+.about-graphic__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(32, 29, 24, 0.16);
+}
+
+@media (max-width: 900px) {
+  .about-graphic {
+    width: min(70vw, 480px);
+    height: min(70vw, 480px);
+    right: -18vw;
+  }
+}
+
+@media (max-width: 640px) {
+  .about-section {
+    padding: 14vh 7vw;
+    align-items: flex-start;
+    padding-top: 18vh;
+  }
+
+  .about-content {
+    max-width: 100%;
+  }
+
+  .about-kicker {
+    margin-bottom: 2em;
+  }
+
+  .about-title {
+    font-size: clamp(2.1rem, 8.5vw, 2.75rem);
+  }
+
+  .about-subtitle {
+    max-width: 30ch;
+    font-size: 1.02rem;
+  }
+
+  .about-mark {
+    margin-top: 3em;
+  }
+
+  .about-graphic {
+    width: 78vw;
+    height: 78vw;
+    right: -30vw;
+    top: 62%;
+  }
+}
