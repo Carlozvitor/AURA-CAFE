@@ -13,6 +13,201 @@ body {
   background: #0a0a0a;
 }
 
+/* --- Navbar --- */
+/* Fixa, transparente, sobre o Hero. Troca de cor (não de fundo) quando
+   a seção clara começa — ver js/navbar.js. */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 4vw;
+  background: transparent;
+  pointer-events: none;
+}
+
+.navbar__logo-link,
+.navbar__links,
+.navbar__menu-btn {
+  pointer-events: auto;
+}
+
+.navbar__logo-link {
+  display: block;
+  line-height: 0;
+}
+
+.navbar__logo {
+  height: 48px;
+  width: auto;
+  display: block;
+  filter: brightness(0) invert(1);
+  transition: filter 0.5s ease;
+}
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 2.75rem;
+}
+
+.navbar__link {
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 500;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #f6f3ee;
+  transition: color 0.5s ease, opacity 0.2s ease;
+  opacity: 0.9;
+}
+
+.navbar__link:hover {
+  opacity: 1;
+}
+
+.navbar__menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 5px;
+  width: 28px;
+  height: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.navbar__menu-btn span {
+  display: block;
+  height: 1px;
+  background: #f6f3ee;
+  transition: background 0.5s ease, width 0.3s ease;
+}
+
+.navbar__menu-btn span:nth-child(1) {
+  width: 20px;
+}
+
+.navbar__menu-btn span:nth-child(2) {
+  width: 14px;
+}
+
+/* Estado escuro: quando a seção clara ("A Aura") entra na viewport */
+
+.navbar--dark .navbar__logo {
+  filter: none;
+}
+
+.navbar--dark .navbar__link {
+  color: #201d18;
+}
+
+.navbar--dark .navbar__menu-btn span {
+  background: #201d18;
+}
+
+/* Menu mobile — painel cheio, não um dropdown genérico */
+
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.4rem;
+  background: #14120f;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-12px);
+  transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s linear 0.5s;
+}
+
+.mobile-menu.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s linear 0s;
+}
+
+.mobile-menu__close {
+  position: absolute;
+  top: 2.4rem;
+  right: 5vw;
+  width: 28px;
+  height: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.mobile-menu__close span {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: #f6f3ee;
+}
+
+.mobile-menu__close span:nth-child(1) {
+  transform: rotate(45deg);
+}
+
+.mobile-menu__close span:nth-child(2) {
+  transform: rotate(-45deg);
+}
+
+.mobile-menu__links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.8rem;
+}
+
+.mobile-menu__link {
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1.6rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  color: #f6f3ee;
+}
+
+@media (min-width: 641px) {
+  .mobile-menu,
+  .navbar__menu-btn {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .navbar {
+    padding: 1rem 6vw;
+  }
+
+  .navbar__logo {
+    height: 36px;
+  }
+
+  .navbar__links {
+    display: none;
+  }
+
+  .navbar__menu-btn {
+    display: flex;
+  }
+}
+
 /* --- Scroll-driven video section --- */
 
 .scroll-video-section {
@@ -111,6 +306,91 @@ body {
   }
 }
 
+/* --- Abertura do vídeo (estado 0%) --- */
+/* Camada sobre o primeiro frame; some nos primeiros ~8% do scroll,
+   controlada pelo mesmo onUpdate do ScrollTrigger do vídeo (ver
+   scroll-frames.js) — não é uma seção nem tem lógica de scroll própria. */
+
+.scroll-intro {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.scroll-intro__scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.36);
+}
+
+.scroll-intro__content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1em;
+  text-align: center;
+  padding: 0 8vw;
+}
+
+.scroll-intro__wordmark {
+  display: block;
+  width: clamp(9rem, 22vw, 15rem);
+  height: auto;
+  filter: brightness(0) invert(1) drop-shadow(0 2px 28px rgba(0, 0, 0, 0.5));
+}
+
+.scroll-intro__tagline {
+  margin: 0;
+  font-weight: 400;
+  font-size: clamp(1rem, 1.6vw, 1.3rem);
+  letter-spacing: 0.01em;
+  color: #f6f3ee;
+  opacity: 0.82;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.45);
+}
+
+.scroll-intro__explore {
+  position: absolute;
+  left: 50%;
+  bottom: 6vh;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6em;
+}
+
+.scroll-intro__arrow {
+  font-size: 1rem;
+  color: #f6f3ee;
+  opacity: 0.75;
+}
+
+.scroll-intro__explore-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: #f6f3ee;
+  opacity: 0.6;
+}
+
+@media (max-width: 640px) {
+  .scroll-intro__wordmark {
+    width: clamp(7rem, 40vw, 9rem);
+  }
+
+  .scroll-intro__tagline {
+    font-size: 0.95rem;
+  }
+
+  .scroll-intro__explore {
+    bottom: 5vh;
+  }
+}
+
 /* --- Seção "A Aura" --- */
 /* Respiro depois do vídeo: fundo claro, silencioso, editorial. */
 
@@ -171,39 +451,37 @@ body {
   opacity: 0;
 }
 
+/* Vídeo de fundo, preenchendo a seção inteira — sem nenhum controle por
+   scroll (toca/pausa só por visibilidade, ver js/about-video.js). */
 .about-graphic {
   position: absolute;
-  top: 50%;
-  right: -6vw;
-  width: min(46vw, 620px);
-  height: min(46vw, 620px);
-  transform: translateY(-50%);
-  z-index: 1;
+  inset: 0;
+  z-index: 0;
   pointer-events: none;
   opacity: 0;
 }
 
-.about-graphic__halo {
-  position: absolute;
-  inset: 8%;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(196, 154, 110, 0.28) 0%, rgba(196, 154, 110, 0.12) 45%, rgba(196, 154, 110, 0) 72%);
-  filter: blur(6px);
+.about-graphic__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-.about-graphic__ring {
+/* Véu leve pra manter o texto legível sobre o vídeo, mais forte do lado
+   do texto e esmaecendo pro resto da cena. */
+.about-scrim {
   position: absolute;
   inset: 0;
-  border-radius: 50%;
-  border: 1px solid rgba(32, 29, 24, 0.16);
-}
-
-@media (max-width: 900px) {
-  .about-graphic {
-    width: min(70vw, 480px);
-    height: min(70vw, 480px);
-    right: -18vw;
-  }
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    rgba(243, 237, 227, 0.92) 0%,
+    rgba(243, 237, 227, 0.72) 32%,
+    rgba(243, 237, 227, 0.3) 60%,
+    rgba(243, 237, 227, 0.08) 100%
+  );
 }
 
 @media (max-width: 640px) {
@@ -234,10 +512,13 @@ body {
     margin-top: 3em;
   }
 
-  .about-graphic {
-    width: 78vw;
-    height: 78vw;
-    right: -30vw;
-    top: 62%;
+  .about-scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(243, 237, 227, 0.94) 0%,
+      rgba(243, 237, 227, 0.8) 45%,
+      rgba(243, 237, 227, 0.35) 75%,
+      rgba(243, 237, 227, 0.1) 100%
+    );
   }
 }

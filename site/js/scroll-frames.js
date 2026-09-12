@@ -98,6 +98,19 @@ function updateText(progress) {
   textEl.style.opacity = Math.min(Math.max(opacity, 0), 1);
 }
 
+/**
+ * Abertura sobre o primeiro frame (0%) — some suavemente nos primeiros
+ * ~8% do progresso do scroll. Puramente decorativa, sem lógica própria
+ * de scroll: só lê o mesmo `self.progress` do ScrollTrigger do vídeo.
+ */
+const INTRO_FADE_END = 0.08;
+const introEl = document.getElementById('scroll-intro');
+
+function updateIntro(progress) {
+  const opacity = 1 - Math.min(progress / INTRO_FADE_END, 1);
+  introEl.style.opacity = opacity;
+}
+
 const images = new Array(FRAME_COUNT);
 let currentFrame = -1;
 
@@ -138,6 +151,7 @@ Promise.all(rest).then(() => {
       const frameIndex = Math.round(timeFraction * (FRAME_COUNT - 1));
       drawFrame(frameIndex);
       updateText(self.progress);
+      updateIntro(self.progress);
     },
   });
 });

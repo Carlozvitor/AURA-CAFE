@@ -14,6 +14,37 @@
 </head>
 <body>
 
+  <header class="navbar" id="navbar">
+    <a href="#" class="navbar__logo-link" aria-label="Aura Café">
+      <img src="assets/images/logo.png" alt="Aura Café" class="navbar__logo" />
+    </a>
+
+    <nav class="navbar__links">
+      <a href="#about-section" class="navbar__link">A AURA</a>
+      <a href="#" class="navbar__link">CAFÉS</a>
+      <a href="#" class="navbar__link">NOSSA CASA</a>
+      <a href="#" class="navbar__link">CONTATO</a>
+    </nav>
+
+    <button class="navbar__menu-btn" id="navbar-menu-btn" aria-label="Abrir menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <button class="mobile-menu__close" id="mobile-menu-close" aria-label="Fechar menu">
+      <span></span>
+      <span></span>
+    </button>
+    <nav class="mobile-menu__links">
+      <a href="#about-section" class="mobile-menu__link">A Aura</a>
+      <a href="#" class="mobile-menu__link">Cafés</a>
+      <a href="#" class="mobile-menu__link">Nossa Casa</a>
+      <a href="#" class="mobile-menu__link">Contato</a>
+    </nav>
+  </div>
+
   <div id="smooth-wrapper">
     <div id="smooth-content">
 
@@ -24,14 +55,33 @@
             <span class="scroll-text__kicker" id="scroll-text-kicker"></span>
             <p class="scroll-text__line" id="scroll-text-line"></p>
           </div>
+          <div class="scroll-intro" id="scroll-intro" aria-hidden="true">
+            <div class="scroll-intro__scrim"></div>
+            <div class="scroll-intro__content">
+              <img class="scroll-intro__wordmark" src="assets/images/logo.png" alt="Aura Café" />
+              <p class="scroll-intro__tagline">Um momento para saborear.</p>
+            </div>
+            <div class="scroll-intro__explore">
+              <span class="scroll-intro__arrow">↓</span>
+              <span class="scroll-intro__explore-label">EXPLORE</span>
+            </div>
+          </div>
         </div>
       </section>
 
       <section class="about-section" id="about-section">
         <div class="about-graphic" aria-hidden="true">
-          <div class="about-graphic__halo"></div>
-          <div class="about-graphic__ring"></div>
+          <video
+            class="about-graphic__video"
+            id="about-graphic-video"
+            src="assets/video/about-cup.mp4"
+            muted
+            playsinline
+            webkit-playsinline="true"
+            preload="auto"
+          ></video>
         </div>
+        <div class="about-scrim" aria-hidden="true"></div>
         <div class="about-content">
           <p class="about-kicker" id="about-kicker">02 — A AURA</p>
           <h2 class="about-title" id="about-title">Mais do que café.</h2>
@@ -48,5 +98,7 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollSmoother.min.js"></script>
   <script src="js/scroll-frames.js"></script>
   <script src="js/about-section.js"></script>
+  <script src="js/about-video.js"></script>
+  <script src="js/navbar.js"></script>
 </body>
 </html>
