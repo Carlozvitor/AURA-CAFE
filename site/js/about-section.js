@@ -3,7 +3,8 @@ gsap.registerPlugin(ScrollTrigger);
 /**
  * Entrada da seção "A Aura" — dispara uma vez quando a seção entra na
  * viewport (não é scroll-scrub como o vídeo; é uma revelação editorial,
- * lenta e discreta, na ordem: gráfico + kicker → título → subtítulo → marca).
+ * lenta e discreta, na ordem: gráfico + kicker → título → texto →
+ * frase de destaque → detalhe editorial).
  */
 const aboutTl = gsap.timeline({
   paused: true,
@@ -19,8 +20,9 @@ aboutTl
     { y: 0, opacity: 1, duration: 1.1 },
     '-=0.6'
   )
-  .to('#about-subtitle', { opacity: 1, duration: 1 }, '-=0.55')
-  .to('#about-mark', { opacity: 1, duration: 0.9 }, '-=0.5');
+  .to('#about-body', { opacity: 1, duration: 1 }, '-=0.55')
+  .to('#about-highlight', { opacity: 1, duration: 0.9 }, '-=0.5')
+  .to('#about-detail', { opacity: 1, duration: 0.8 }, '-=0.4');
 
 ScrollTrigger.create({
   trigger: '#about-section',

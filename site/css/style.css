@@ -40,6 +40,7 @@ body {
 .navbar__logo-link {
   display: block;
   line-height: 0;
+  transition: opacity 0.5s ease;
 }
 
 .navbar__logo {
@@ -101,6 +102,11 @@ body {
 }
 
 /* Estado escuro: quando a seção clara ("A Aura") entra na viewport */
+
+.navbar--dark .navbar__logo-link {
+  opacity: 0;
+  pointer-events: none;
+}
 
 .navbar--dark .navbar__logo {
   filter: none;
@@ -361,12 +367,37 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 0.6em;
+  pointer-events: auto;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.scroll-intro__explore::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 140px;
+  height: 140px;
+  transform: translate(-50%, -50%) scale(0.5);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.14) 45%, rgba(255, 255, 255, 0) 72%);
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.scroll-intro__explore:hover::before {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .scroll-intro__arrow {
   font-size: 1rem;
   color: #f6f3ee;
   opacity: 0.75;
+  transition: opacity 0.3s ease;
 }
 
 .scroll-intro__explore-label {
@@ -375,6 +406,12 @@ body {
   letter-spacing: 0.18em;
   color: #f6f3ee;
   opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-intro__explore:hover .scroll-intro__arrow,
+.scroll-intro__explore:hover .scroll-intro__explore-label {
+  opacity: 1;
 }
 
 @media (max-width: 640px) {
@@ -408,6 +445,7 @@ body {
   position: relative;
   z-index: 2;
   max-width: 34rem;
+  margin-top: 3.5rem;
 }
 
 .about-kicker {
@@ -424,28 +462,49 @@ body {
   margin: 0;
   font-family: 'Instrument Sans', sans-serif;
   font-weight: 600;
-  font-size: clamp(2.5rem, 5.4vw, 4.75rem);
+  font-size: clamp(2.2rem, 4.7vw, 4.1rem);
   line-height: 1.08;
   letter-spacing: -0.02em;
   color: #201d18;
   opacity: 0;
 }
 
-.about-subtitle {
-  margin: 1.4em 0 0;
-  max-width: 24ch;
-  font-weight: 400;
-  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
-  line-height: 1.6;
-  color: #7c7364;
+.about-body {
+  margin: 1.7em 0 0;
+  max-width: 34ch;
   opacity: 0;
 }
 
-.about-mark {
-  margin: 4em 0 0;
-  font-size: 0.72rem;
+.about-body p {
+  margin: 0 0 1em;
+  font-weight: 400;
+  font-size: clamp(0.98rem, 1.25vw, 1.08rem);
+  line-height: 1.7;
+  color: #7c7364;
+}
+
+.about-body p:last-child {
+  margin-bottom: 0;
+}
+
+.about-highlight {
+  margin: 1.9em 0 0;
+  max-width: 24ch;
+  padding-left: 1em;
+  border-left: 1px solid rgba(32, 29, 24, 0.15);
+  font-weight: 400;
+  font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+  line-height: 1.45;
+  color: #4a443b;
+  opacity: 0;
+}
+
+.about-detail {
+  margin: 3em 0 0;
+  font-size: 0.68rem;
   font-weight: 500;
-  letter-spacing: 0.12em;
+  line-height: 1.8;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #ab9f8d;
   opacity: 0;
@@ -500,16 +559,25 @@ body {
   }
 
   .about-title {
-    font-size: clamp(2.1rem, 8.5vw, 2.75rem);
+    font-size: clamp(1.85rem, 7.5vw, 2.4rem);
   }
 
-  .about-subtitle {
-    max-width: 30ch;
-    font-size: 1.02rem;
+  .about-body {
+    max-width: 34ch;
   }
 
-  .about-mark {
-    margin-top: 3em;
+  .about-body p {
+    font-size: 0.98rem;
+  }
+
+  .about-highlight {
+    max-width: 90%;
+    font-size: 1.15rem;
+  }
+
+  .about-detail {
+    margin-top: 2.4em;
+    max-width: 26ch;
   }
 
   .about-scrim {
@@ -520,5 +588,277 @@ body {
       rgba(243, 237, 227, 0.35) 75%,
       rgba(243, 237, 227, 0.1) 100%
     );
+  }
+}
+
+/* --- Seção "CAFÉS" --- */
+/* Mesmo fundo claro da "A Aura" — sem corte entre as duas. No desktop, a
+   seção fica presa (pin) e os 4 produtos entram um a um, controlados pelo
+   scroll (ver js/cafes-section.js). No mobile, sem pin: cada produto revela
+   conforme entra na viewport, mesma física, só que empilhados. */
+
+.cafes-section {
+  position: relative;
+  height: 420vh;
+  background: #f3ede3;
+}
+
+.cafes-sticky {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3vh;
+  padding: 4vh 5vw;
+  background: #f3ede3;
+}
+
+.cafes-intro {
+  max-width: 34rem;
+  text-align: center;
+  opacity: 0;
+}
+
+.cafes-kicker {
+  margin: 0 0 0.6em;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #96897a;
+}
+
+.cafes-title {
+  margin: 0;
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 600;
+  font-size: clamp(1.6rem, 2.8vw, 2.35rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: #201d18;
+}
+
+.cafes-subtitle {
+  margin: 0.55em auto 0;
+  max-width: 46ch;
+  font-weight: 400;
+  font-size: clamp(0.88rem, 1vw, 0.98rem);
+  line-height: 1.55;
+  color: #7c7364;
+}
+
+.cafes-products {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.5vw;
+  width: 100%;
+  max-width: 1040px;
+  align-items: end;
+}
+
+.cafes-product {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.7rem;
+}
+
+.cafes-product__image-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.cafes-product__image {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 34vh;
+  display: block;
+}
+
+.cafes-product__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35em;
+  opacity: 0;
+}
+
+.cafes-product__number {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: #ab9f8d;
+}
+
+.cafes-product__name {
+  margin: 0;
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  color: #201d18;
+}
+
+.cafes-product__profile {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: #7c7364;
+}
+
+@media (max-width: 900px) {
+  .cafes-section {
+    height: auto;
+    padding-bottom: 10vh;
+  }
+
+  .cafes-sticky {
+    height: auto;
+    overflow: visible;
+    padding: 12vh 8vw 4vh;
+    gap: 8vh;
+  }
+
+  .cafes-intro {
+    max-width: 100%;
+  }
+
+  .cafes-title {
+    font-size: clamp(1.8rem, 7vw, 2.4rem);
+  }
+
+  .cafes-subtitle {
+    max-width: 32ch;
+  }
+
+  .cafes-products {
+    grid-template-columns: 1fr;
+    gap: 0;
+    max-width: 280px;
+  }
+
+  .cafes-product {
+    min-height: 62vh;
+    justify-content: center;
+  }
+}
+
+/* --- Seção "Nossa Casa" --- */
+/* Mesmo fundo claro, continuação editorial depois de "Cafés". Composição
+   assimétrica: texto compacto à esquerda, vídeo grande sangrando até a
+   borda direita. Sem pin, sem scroll-scrub — só uma entrada (ver
+   js/casa-section.js) e o vídeo tocando/pausando por visibilidade. */
+
+.casa-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  gap: 4vw;
+  background: #f3ede3;
+  padding: 11vh 0 11vh 9vw;
+  overflow: hidden;
+}
+
+.casa-content {
+  flex: 0 0 auto;
+  max-width: 24rem;
+  z-index: 2;
+}
+
+.casa-kicker {
+  margin: 0 0 1.4em;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #96897a;
+  opacity: 0;
+}
+
+.casa-title {
+  margin: 0;
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 600;
+  font-size: clamp(1.9rem, 3vw, 2.55rem);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  color: #201d18;
+  opacity: 0;
+}
+
+.casa-body {
+  margin: 1.3em 0 0;
+  max-width: 32ch;
+  opacity: 0;
+}
+
+.casa-body p {
+  margin: 0 0 1em;
+  font-weight: 400;
+  font-size: clamp(0.92rem, 1.05vw, 1rem);
+  line-height: 1.65;
+  color: #7c7364;
+}
+
+.casa-body p:last-child {
+  margin-bottom: 0;
+}
+
+.casa-location {
+  margin: 2.6em 0 0;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #ab9f8d;
+  opacity: 0;
+}
+
+.casa-media {
+  flex: 1 1 auto;
+  align-self: stretch;
+  min-width: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.casa-media__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .casa-section {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 6vh;
+    padding: 12vh 7vw;
+  }
+
+  .casa-content {
+    max-width: 100%;
+  }
+
+  .casa-title {
+    font-size: clamp(1.7rem, 6.5vw, 2.1rem);
+  }
+
+  .casa-body {
+    max-width: 38ch;
+  }
+
+  .casa-media {
+    align-self: stretch;
+    width: 100%;
+    height: 52vh;
   }
 }
