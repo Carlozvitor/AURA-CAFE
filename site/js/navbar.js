@@ -8,6 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 (function () {
   const navbar = document.getElementById('navbar');
   const aboutSection = document.getElementById('about-section');
+  const contatoSection = document.getElementById('contato-section');
   if (!navbar || !aboutSection) return;
 
   ScrollTrigger.create({
@@ -16,6 +17,20 @@ gsap.registerPlugin(ScrollTrigger);
     onEnter: () => navbar.classList.add('navbar--dark'),
     onLeaveBack: () => navbar.classList.remove('navbar--dark'),
   });
+
+  /**
+   * "Contato" volta ao fundo escuro do Hero — a navbar precisa reverter
+   * pro estado claro (logo + texto branco) enquanto essa seção estiver
+   * na viewport. Trigger independente, não mexe no de cima.
+   */
+  if (contatoSection) {
+    ScrollTrigger.create({
+      trigger: contatoSection,
+      start: 'top 85%',
+      onEnter: () => navbar.classList.remove('navbar--dark'),
+      onLeaveBack: () => navbar.classList.add('navbar--dark'),
+    });
+  }
 })();
 
 /**

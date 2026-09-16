@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Fraunces:ital,wght@0,600;1,500&display=swap"
   />
   <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -21,9 +21,9 @@
 
     <nav class="navbar__links">
       <a href="#about-section" class="navbar__link">A AURA</a>
-      <a href="#" class="navbar__link">CAFÉS</a>
-      <a href="#" class="navbar__link">NOSSA CASA</a>
-      <a href="#" class="navbar__link">CONTATO</a>
+      <a href="#cafes-section" class="navbar__link">CAFÉS</a>
+      <a href="#casa-section" class="navbar__link">NOSSA CASA</a>
+      <a href="#contato-section" class="navbar__link">CONTATO</a>
     </nav>
 
     <button class="navbar__menu-btn" id="navbar-menu-btn" aria-label="Abrir menu" aria-expanded="false">
@@ -39,9 +39,9 @@
     </button>
     <nav class="mobile-menu__links">
       <a href="#about-section" class="mobile-menu__link">A Aura</a>
-      <a href="#" class="mobile-menu__link">Cafés</a>
-      <a href="#" class="mobile-menu__link">Nossa Casa</a>
-      <a href="#" class="mobile-menu__link">Contato</a>
+      <a href="#cafes-section" class="mobile-menu__link">Cafés</a>
+      <a href="#casa-section" class="mobile-menu__link">Nossa Casa</a>
+      <a href="#contato-section" class="mobile-menu__link">Contato</a>
     </nav>
   </div>
 
@@ -177,6 +177,28 @@
         </div>
       </section>
 
+      <section class="contato-section" id="contato-section">
+        <div class="contato-content">
+          <p class="contato-kicker" id="contato-kicker">05 — CONTATO</p>
+          <h2 class="contato-title" id="contato-title">Vamos<br />conversar?</h2>
+          <p class="contato-body" id="contato-body">
+            Escreva pra gente, visite Nossa Casa ou nos siga pra acompanhar
+            de perto cada nova aura.
+          </p>
+          <p class="contato-links" id="contato-links">
+            <a href="mailto:ola@auracafe.com.br" class="contato-link">OLA@AURACAFE.COM.BR</a>
+            <span class="contato-divider">·</span>
+            <span class="contato-link">@AURA.CAFE</span>
+          </p>
+          <p class="contato-detail" id="contato-detail">FORTALEZA · CEARÁ</p>
+        </div>
+      </section>
+
+      <footer class="site-footer" id="site-footer">
+        <img src="assets/images/logo.png" alt="Aura Café" class="site-footer__logo" />
+        <p class="site-footer__copy">© 2026 Aura Café. Todos os direitos reservados.</p>
+      </footer>
+
     </div>
   </div>
 
@@ -189,5 +211,6 @@
   <script src="js/navbar.js"></script>
   <script src="js/cafes-section.js"></script>
   <script src="js/casa-section.js"></script>
+  <script src="js/contato-section.js"></script>
 </body>
 </html>
