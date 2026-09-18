@@ -17,6 +17,9 @@ Thumbs.db
 # Dependências
 node_modules/
 
+# Vercel (metadata local de link do projeto)
+.vercel
+
 # Arquivos temporários
 *.log
 *.tmp

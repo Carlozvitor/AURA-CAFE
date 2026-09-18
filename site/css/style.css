@@ -14,8 +14,11 @@ body {
 }
 
 /* --- Navbar --- */
-/* Fixa, transparente, sobre o Hero. Troca de cor (não de fundo) quando
-   a seção clara começa — ver js/navbar.js. */
+/* Fixa, sobre o Hero. Troca de cor (não de fundo) quando a seção clara
+   começa — ver js/navbar.js. Um scrim (mesma técnica do .about-scrim)
+   protege a legibilidade dos links quando algo passa por trás — ex.:
+   o "salto" dos produtos em Cafés, que pode parar bem sob a navbar se
+   o usuário pausar o scroll no meio da animação. */
 
 .navbar {
   position: fixed;
@@ -27,7 +30,13 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 1.5rem 4vw;
-  background: transparent;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 10, 10, 0.28) 0%,
+    rgba(10, 10, 10, 0.12) 55%,
+    rgba(10, 10, 10, 0) 100%
+  );
+  transition: background 0.5s ease;
   pointer-events: none;
 }
 
@@ -102,6 +111,15 @@ body {
 }
 
 /* Estado escuro: quando a seção clara ("A Aura") entra na viewport */
+
+.navbar--dark {
+  background: linear-gradient(
+    to bottom,
+    rgba(243, 237, 227, 0.92) 0%,
+    rgba(243, 237, 227, 0.55) 55%,
+    rgba(243, 237, 227, 0) 100%
+  );
+}
 
 .navbar--dark .navbar__logo-link {
   opacity: 0;

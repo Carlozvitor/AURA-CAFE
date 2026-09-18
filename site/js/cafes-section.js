@@ -47,6 +47,12 @@ ScrollTrigger.matchMedia({
     const INTRO_END = 0.08;
     const span = (1 - INTRO_END) / cafesProducts.length;
 
+    // Estado inicial (t=0): sem isso, o primeiro paint usa o layout puro do
+    // CSS (produtos já visíveis/parados) até o ScrollTrigger disparar o
+    // primeiro onUpdate real — daí eles "pulam" pro escondido antes de cair.
+    applyIntro(0);
+    cafesProducts.forEach((el) => applyProduct(el, 0, 90));
+
     const st = ScrollTrigger.create({
       trigger: cafesSection,
       start: 'top top',
@@ -68,7 +74,8 @@ ScrollTrigger.matchMedia({
   },
 
   '(max-width: 900px)': function () {
-    gsap.set(cafesIntroEl, { opacity: 0 });
+    applyIntro(0);
+    cafesProducts.forEach((el) => applyProduct(el, 0, 30));
 
     const introST = ScrollTrigger.create({
       trigger: cafesIntroEl,
