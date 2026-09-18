@@ -57,10 +57,10 @@ function mapProgressToTimeFraction(progress) {
  */
 const TEXT_BOUNDARIES = [0, 0.2, 0.45, 0.7, 1.0];
 const TEXT_CONTENT = [
-  { kicker: 'AURA CAFÉ — 01', line: 'Um momento para saborear.', position: 'bottom-left' },
-  { kicker: 'AURA CAFÉ — 02', line: 'Feito com intenção.', position: 'bottom-right' },
-  { kicker: 'AURA CAFÉ — 03', line: 'Do grão à experiência.', position: 'top-right' },
-  { kicker: 'AURA CAFÉ — 04', line: 'Isso é Aura.', position: 'top-left' },
+  { kicker: 'AURA CAFÉ, 01', line: 'Um momento para saborear.', position: 'bottom-left' },
+  { kicker: 'AURA CAFÉ, 02', line: 'Feito com intenção.', position: 'bottom-right' },
+  { kicker: 'AURA CAFÉ, 03', line: 'Do grão à experiência.', position: 'top-right' },
+  { kicker: 'AURA CAFÉ, 04', line: 'Isso é Aura.', position: 'top-left' },
 ];
 const TEXT_FADE_ZONE = 0.04;
 
